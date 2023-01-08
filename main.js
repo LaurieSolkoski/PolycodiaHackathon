@@ -4,6 +4,7 @@ const IDLE_BEGIN = 10000 // time that can be spent in one general area until con
 let currentLocation;
 let timer;
 let idleTime = 0;
+let idles = [];
 
 let oldLocation = navigator.geolocation.getCurrentPosition((pos) => {
     oldLocation = {
@@ -22,7 +23,6 @@ const watchId = navigator.geolocation.watchPosition(onSuccess, onError, { "enabl
 
 let n = 1
 let count = setInterval(() => {
-    console.log(n + " sec");
     let minutes = Math.floor(n / 60).toString().padStart(2, "0");
     let seconds = n % 60;
     seconds = seconds.toString().padStart(2, "0");
@@ -30,7 +30,6 @@ let count = setInterval(() => {
     n++;
     if (n > IDLE_BEGIN / 1000) {
         idleTime = n;
-        console.log("IDLE");
     }
 }, 1000);
 
@@ -40,6 +39,10 @@ function onSuccess(position) {
     currentLocation = { "latitude": position.coords.latitude, "longitude": position.coords.longitude };
 
     if (!(idleCheck(oldLocation, currentLocation))) {
+        currentTime = new Date();
+        let idle = {"end": currentTime, "duration": idleTime}
+        idles.push(idle);
+        console.log(idles);
         n = 1;
         clearTimeout(timer);
         oldLocation = currentLocation;
