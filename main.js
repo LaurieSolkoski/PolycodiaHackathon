@@ -90,7 +90,7 @@ function onError(error) {
 function onTimeout() {
     console.log("The location has not changed for 10 seconds");
     const locationDiv = document.getElementById("location");
-    idleText = "You have been idle for at least 10 seconds >:("
+    idleText = "ACCEPTABLE IDLE"
     locationDiv.innerHTML = idleText;
     locationDiv.setAttribute("style", "background-color: red");
     document.body.style.backgroundColor = "red";
