@@ -17,3 +17,11 @@
     font-size: 96px;
     font-weight: bold;
 }
+
+
+form {
+    position: relative;
+    top: 500px;
+    left: 41%;
+    size: 40px;
+}
