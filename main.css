@@ -11,9 +11,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  #countdown-clock {
+}
+
+#countdown-clock {
     font-size: 96px;
     font-weight: bold;
-  }
+}
