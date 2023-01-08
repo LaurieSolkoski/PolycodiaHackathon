@@ -21,7 +21,6 @@
         // Save the current location
         currentLocation = { latitude, longitude };
 
-        // Reset the timer
         clearTimeout(timer);
         timer = setTimeout(onTimeout, 10000);
 
@@ -29,13 +28,12 @@
         document.getElementById("location").innerHTML = `Your location: (${latitude}, ${longitude})`;
       }
 
-      // Handle the error case of getCurrentPosition
+
       function onError(error) {
-        // Log an error message to the HTML page
         document.getElementById("location").innerHTML = "Unable to get your location: " + error.message;
       }
 
-      // Handle the case where the location has not changed for 30 seconds
+      // Handle the case where the location has not changed for 10 seconds
       function onTimeout() {
         console.log("The location has not changed for 10 seconds");
       }
