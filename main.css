@@ -1,0 +1,19 @@
+#alarm-clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 160px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #countdown-clock {
+    font-size: 96px;
+    font-weight: bold;
+  }

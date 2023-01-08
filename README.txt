@@ -1,0 +1,1 @@
+Developers: Alex Sichitiu, Bardia Timouri, Laurie Solkoski
