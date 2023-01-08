@@ -97,7 +97,6 @@ function onTimeout() {
     const locationDiv = document.getElementById("location");
     idleText = "IDLE"
     locationDiv.innerHTML = idleText;
-    locationDiv.setAttribute("style", "background-color: yellow");
     document.body.style.backgroundColor = "red";
 }
 
@@ -113,6 +112,5 @@ function updateLocation(latitude, longitude, errorMessage) {
     }
     const locationDiv = document.getElementById("location");
     locationDiv.innerHTML = locationText;
-    locationDiv.setAttribute("style", "background-color: green");
     document.body.style.backgroundColor = "green";
 }

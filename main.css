@@ -21,7 +21,25 @@
 
 form {
     position: relative;
-    top: 500px;
-    left: 41%;
-    size: 40px;
-}
+    margin-top: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    font-size: 18px;
+  }
+
+  form select {
+    height: 40px;
+  }
+
+  form button {
+    height: 40px;
+    width: 60px;
+  }
+
+  #location {
+    text-align: center;
+    margin-top: 250px; /* adjust as needed */
+    font-size: 100px;
+    color: rgb(219, 207, 207);
+  }
