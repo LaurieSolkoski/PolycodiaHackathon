@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Location</title>
+  </head>
+  <body>
+    <p id="location"></p>
+    <script>
+      // Initialize variables
+      let currentLocation;
+      let timer;
+
+      // Get the current live location
+      navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true, maximumAge: 0 });
+
+      // Handle the success case of getCurrentPosition
+      function onSuccess(position) {
+        // Get the latitude and longitude from the position object
+        const { latitude, longitude } = position.coords;
+
+        // Save the current location
+        currentLocation = { latitude, longitude };
+
+        // Reset the timer
+        clearTimeout(timer);
+        timer = setTimeout(onTimeout, 10000);
+
+        // Log the location to the HTML page
+        document.getElementById("location").innerHTML = `Your location: (${latitude}, ${longitude})`;
+      }
+
+      // Handle the error case of getCurrentPosition
+      function onError(error) {
+        // Log an error message to the HTML page
+        document.getElementById("location").innerHTML = "Unable to get your location: " + error.message;
+      }
+
+      // Handle the case where the location has not changed for 30 seconds
+      function onTimeout() {
+        console.log("The location has not changed for 10 seconds");
+      }
+    </script>
+  </body>
+</html>
