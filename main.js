@@ -116,4 +116,5 @@ document.getElementById("submit").addEventListener("click", (e) => {
     let res = document.getElementById("res");
     if (res.innerHTML != null)
         res.innerHTML = "Report Submitted";
+        setInterval(() => {res.innerHTML = null}, 5000)
 })
