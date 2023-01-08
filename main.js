@@ -41,7 +41,7 @@ function onSuccess(position) {
     currentLocation = { "latitude": position.coords.latitude, "longitude": position.coords.longitude };
     if (!(idleCheck(oldLocation, currentLocation))) {
         currentTime = new Date();
-        let idle = { "end": currentTime, "duration": idleTime }
+        let idle = { "endDate": currentTime, "duration": idleTime, "coordinate": currentLocation }
         idles.push(idle);
         console.log(idles);
         n = 1;
@@ -65,10 +65,8 @@ function onSuccess(position) {
 
 function idleCheck(old, current) {
     if (Math.abs(measure(currentLocation.latitude, currentLocation.longitude, oldLocation.latitude, oldLocation.longitude)) <= SENSITIVITY) {
-        console.log("Idling detected.");
         return true;
     } else {
-        console.log("Movement detected.");
         return false;
     }
 
@@ -93,7 +91,6 @@ function onError(error) {
 
 // visually indicates idle status
 function onTimeout() {
-    console.log("The location has not changed for 10 seconds");
     const locationDiv = document.getElementById("location");
     idleText = "IDLE"
     locationDiv.innerHTML = idleText;
