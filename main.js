@@ -1,6 +1,10 @@
 const SENSITIVITY = 20; // General area where coordinates can vary without reseting idle timer. In meters.
 const IDLE_BEGIN = 10000 // time that can be spent in one general area until considered idle. In ms.
 
+let currentLocation;
+let timer;
+let idleTime = 0;
+
 let oldLocation = navigator.geolocation.getCurrentPosition((pos) => {
     oldLocation = {
         "latitude": pos.coords.latitude,
@@ -11,8 +15,7 @@ let oldLocation = navigator.geolocation.getCurrentPosition((pos) => {
     updateLocation(pos.coords.latitude, pos.coords.longitude)
 },
     onError, { "enableHighAccuracy": true })
-let currentLocation;
-let timer;
+
 
 
 const watchId = navigator.geolocation.watchPosition(onSuccess, onError, { "enableHighAccuracy": true });
@@ -27,7 +30,7 @@ function countdown() {
         document.getElementById("countdown-clock").innerHTML = `${minutes}:${seconds}`;
         n++;
         if (n > IDLE_BEGIN / 1000) {
-            clearInterval(count);
+            idleTime = n;
             console.log("IDLE");
         }
     }, 1000);
