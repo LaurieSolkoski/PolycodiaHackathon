@@ -116,5 +116,6 @@ document.getElementById("submit").addEventListener("click", (e) => {
     let res = document.getElementById("res");
     if (res.innerHTML != null)
         res.innerHTML = "Report Submitted";
-        setTimeout(() => {res.innerHTML = null}, 5000)
+        res.setAttribute("style", "visibility:visible")
+        setTimeout(() => {res.innerHTML = null; res.setAttribute("style", "visibility:hidden")}, 5000)
 })

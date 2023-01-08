@@ -1,8 +1,4 @@
 #alarm-clock {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 400px;
     height: 160px;
     border: 2px solid black;
@@ -20,10 +16,7 @@
 
 
 form {
-    position: relative;
-    margin-top: 250px;
-    left: 50%;
-    transform: translateX(-50%);
+
     width: 200px;
     font-size: 18px;
   }
@@ -39,7 +32,47 @@ form {
 
   #location {
     text-align: center;
-    margin-top: 250px; /* adjust as needed */
     font-size: 100px;
     color: rgb(219, 207, 207);
+    height: auto;
+  }
+
+  body {
+    display: grid;
+    grid-template-rows: auto auto auto !important;
+  }
+
+  #alarm-clock {
+    grid-row: 2;
+    margin: 0 auto;
+    padding-top: 5%;
+  }
+
+  #location {
+    grid-row: 1;
+    margin: 0 auto;
+  }
+
+  #reasons {
+    grid-row: 3;
+    display: grid;
+    grid-template-rows: auto auto;
+    margin: 0 auto;
+    padding-top: 10%;
+  }
+
+  select {
+    grid-row: 1;
+  }
+
+  #submit {
+    grid-row: 1;
+  }
+
+  #res {
+    grid-row: 2;
+    border: 3px solid black;
+    background-color: darkred; 
+    border-radius: 5px;  
+    visibility: hidden;
   }
