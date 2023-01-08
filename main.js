@@ -92,8 +92,8 @@ function onTimeout() {
     const locationDiv = document.getElementById("location");
     idleText = "ACCEPTABLE IDLE"
     locationDiv.innerHTML = idleText;
-    locationDiv.setAttribute("style", "background-color: red");
-    document.body.style.backgroundColor = "red";
+    locationDiv.setAttribute("style", "background-color: yellow");
+    document.body.style.backgroundColor = "yellow";
 }
 
 function updateLocation(latitude, longitude, errorMessage) {
@@ -101,7 +101,7 @@ function updateLocation(latitude, longitude, errorMessage) {
     if (errorMessage) {
         locationText = "Unable to get your location: " + errorMessage;
     } else if (latitude && longitude) {
-        locationText = `Your location: (${latitude}, ${longitude})`;
+        locationText = "PRODUCTIVE";
     } else {
         locationText = "Loading your location...";
     }
