@@ -12,8 +12,14 @@
     <div id="countdown-clock">00:00</div>
   </div>
   <form>
-    <input type="text" placeholder="Describe the cause of idling.">
-    <button disabled="true">Submit Reason</button>
+    <select name="Reasons" id="reasonsList">
+      <option value="reason1">On Break</option>
+      <option value="reason2">Waiting To Load</option>
+      <option value="reason3">Waiting To Dump</option>
+      <option value="reason4">Fueling</option>
+      <option value="reason5">Lack Of Work</option>
+    </select>
+    <button id="submit" type="button">Submit</button>
   </form>
   <script src="main.js"></script>
 
