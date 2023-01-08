@@ -6,6 +6,7 @@ let timer;
 let idleTime = 0;
 let idles = [];
 
+// establishes the initial position.
 let oldLocation = navigator.geolocation.getCurrentPosition((pos) => {
     oldLocation = {
         "latitude": pos.coords.latitude,
@@ -19,8 +20,10 @@ let oldLocation = navigator.geolocation.getCurrentPosition((pos) => {
 
 
 
+// updates regularly with current position.
 const watchId = navigator.geolocation.watchPosition(onSuccess, onError, { "enableHighAccuracy": true });
 
+// defines the timer that tracks idle time.
 let n = 1
 let count = setInterval(() => {
     let minutes = Math.floor(n / 60).toString().padStart(2, "0");
@@ -33,14 +36,12 @@ let count = setInterval(() => {
     }
 }, 1000);
 
-
+// resets timer
 function onSuccess(position) {
-
     currentLocation = { "latitude": position.coords.latitude, "longitude": position.coords.longitude };
-
     if (!(idleCheck(oldLocation, currentLocation))) {
         currentTime = new Date();
-        let idle = {"end": currentTime, "duration": idleTime}
+        let idle = { "end": currentTime, "duration": idleTime }
         idles.push(idle);
         console.log(idles);
         n = 1;
@@ -60,6 +61,7 @@ function onSuccess(position) {
 //     console.log("Movement detected.");
 //     return false;
 //   }
+
 
 function idleCheck(old, current) {
     if (Math.abs(measure(currentLocation.latitude, currentLocation.longitude, oldLocation.latitude, oldLocation.longitude)) <= SENSITIVITY) {
@@ -82,14 +84,14 @@ function idleCheck(old, current) {
         var d = R * c;
         return d * 1000; // km -> m
     }
-
-
 }
 
+// error function
 function onError(error) {
     updateLocation(null, null, error.message);
 }
 
+// visually indicates idle status
 function onTimeout() {
     console.log("The location has not changed for 10 seconds");
     const locationDiv = document.getElementById("location");
@@ -99,6 +101,7 @@ function onTimeout() {
     document.body.style.backgroundColor = "red";
 }
 
+// visually indicates non-idle status
 function updateLocation(latitude, longitude, errorMessage) {
     let locationText;
     if (errorMessage) {
