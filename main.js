@@ -113,3 +113,9 @@ function updateLocation(latitude, longitude, errorMessage) {
     locationDiv.setAttribute("style", "background-color: green");
     document.body.style.backgroundColor = "green";
 }
+
+document.getElementById("submit").addEventListener("click", (e) => {
+    let res = document.getElementById("res");
+    if (res.innerHTML != null)
+        res.innerHTML = "Report Submitted";
+})
