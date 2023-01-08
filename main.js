@@ -11,7 +11,7 @@ let oldLocation = navigator.geolocation.getCurrentPosition((pos) => {
         "longitude": pos.coords.longitude
     };
     timer = setTimeout(onTimeout, IDLE_BEGIN);
-    countdown();
+    count;
     updateLocation(pos.coords.latitude, pos.coords.longitude)
 },
     onError, { "enableHighAccuracy": true })
@@ -20,32 +20,32 @@ let oldLocation = navigator.geolocation.getCurrentPosition((pos) => {
 
 const watchId = navigator.geolocation.watchPosition(onSuccess, onError, { "enableHighAccuracy": true });
 
-function countdown() {
-    let n = 1;
-    let count = setInterval(() => {
-        console.log(n + " sec");
-        let minutes = Math.floor(n / 60).toString().padStart(2, "0");
-        let seconds = n % 60;
-        seconds = seconds.toString().padStart(2, "0");
-        document.getElementById("countdown-clock").innerHTML = `${minutes}:${seconds}`;
-        n++;
-        if (n > IDLE_BEGIN / 1000) {
-            idleTime = n;
-            console.log("IDLE");
-        }
-    }, 1000);
-}
+let n = 1
+let count = setInterval(() => {
+    console.log(n + " sec");
+    let minutes = Math.floor(n / 60).toString().padStart(2, "0");
+    let seconds = n % 60;
+    seconds = seconds.toString().padStart(2, "0");
+    document.getElementById("countdown-clock").innerHTML = `${minutes}:${seconds}`;
+    n++;
+    if (n > IDLE_BEGIN / 1000) {
+        idleTime = n;
+        console.log("IDLE");
+    }
+}, 1000);
+
 
 function onSuccess(position) {
 
     currentLocation = { "latitude": position.coords.latitude, "longitude": position.coords.longitude };
 
     if (!(idleCheck(oldLocation, currentLocation))) {
+        n = 1;
         clearTimeout(timer);
         oldLocation = currentLocation;
         updateLocation(currentLocation.latitude, currentLocation.longitude);
         setTimeout(onTimeout, IDLE_BEGIN);
-        countdown();
+        count;
     }
 }
 
@@ -90,10 +90,10 @@ function onError(error) {
 function onTimeout() {
     console.log("The location has not changed for 10 seconds");
     const locationDiv = document.getElementById("location");
-    idleText = "ACCEPTABLE IDLE"
+    idleText = "IDLE"
     locationDiv.innerHTML = idleText;
     locationDiv.setAttribute("style", "background-color: yellow");
-    document.body.style.backgroundColor = "yellow";
+    document.body.style.backgroundColor = "red";
 }
 
 function updateLocation(latitude, longitude, errorMessage) {
