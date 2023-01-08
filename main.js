@@ -2,7 +2,7 @@ const SENSITIVITY = 20; // General area where coordinates can vary without reset
 const IDLE_BEGIN = 10000 // time that can be spent in one general area until considered idle. In ms.
 
 let currentLocation;
-let timer;
+var timer;
 let idleTime = 0;
 let idles = [];
 
@@ -33,6 +33,7 @@ let count = setInterval(() => {
     n++;
     if (n > IDLE_BEGIN / 1000) {
         idleTime = n;
+        document.getElementById("reasons").setAttribute("style", "visibility:visible");
     }
 }, 1000);
 
@@ -40,16 +41,18 @@ let count = setInterval(() => {
 function onSuccess(position) {
     currentLocation = { "latitude": position.coords.latitude, "longitude": position.coords.longitude };
     if (!(idleCheck(oldLocation, currentLocation))) {
+        if (n > IDLE_BEGIN / 10) {
         currentTime = new Date();
         let idle = { "endDate": currentTime, "duration": idleTime, "coordinate": currentLocation }
         idles.push(idle);
         console.log(idles);
+        }
         n = 1;
+        document.getElementById("reasons").setAttribute("style", "visibility:hidden");
         clearTimeout(timer);
+        timer = setTimeout(onTimeout, IDLE_BEGIN); 
         oldLocation = currentLocation;
         updateLocation(currentLocation.latitude, currentLocation.longitude);
-        setTimeout(onTimeout, IDLE_BEGIN);
-        count;
     }
 }
 

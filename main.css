@@ -59,6 +59,7 @@ form {
     grid-template-rows: auto auto;
     margin: 0 auto;
     padding-top: 10%;
+    visibility: hidden;
   }
 
   select {
@@ -76,3 +77,5 @@ form {
     border-radius: 5px;  
     visibility: hidden;
   }
+
+
